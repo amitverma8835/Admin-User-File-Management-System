@@ -6,10 +6,10 @@ import { FaDownload, FaTrashAlt } from 'react-icons/fa';
 
 function List() {
   const navigate = useNavigate();
-  const { userId } = useParams();
-  const [userData, setUserData] = useState({ user: {}, files: [] });
+  const { userId } = useParams(); 
+  const [userData, setUserData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(5); 
 
   useEffect(() => {
     if (userId) {
@@ -25,9 +25,8 @@ function List() {
 
   const fetchUserData = async () => {
     try {
-      const userResponse = await axios.get(`https://tuition-app-suz1.onrender.com/api/user/${userId}`);
-      const filesResponse = await axios.get(`https://tuition-app-suz1.onrender.com/api/files/${userId}`);
-      setUserData({ user: userResponse.data, files: filesResponse.data });
+      const response = await axios.get(`https://tuition-app-suz1.onrender.com/api/user/${userId}`);
+      setUserData(response.data);
     } catch (error) {
       console.log('Error fetching data:', error);
     }
@@ -41,10 +40,7 @@ function List() {
     try {
       await axios.delete(`https://tuition-app-suz1.onrender.com/api/delete-file/${fileId}`);
       alert("File deleted successfully!");
-      setUserData(prevState => ({
-        ...prevState,
-        files: prevState.files.filter(file => file._id !== fileId)
-      }));
+      setUserData(userData.filter(file => file._id !== fileId));
     } catch (error) {
       console.error("Error deleting file:", error);
       alert("Failed to delete file");
@@ -53,20 +49,20 @@ function List() {
 
   const calculateItemsPerPage = () => {
     const screenHeight = window.innerHeight;
-    const itemHeight = 120;
-    const maxItems = Math.floor((screenHeight - 200) / itemHeight);
+    const itemHeight = 120; 
+    const maxItems = Math.floor((screenHeight - 200) / itemHeight); 
     setItemsPerPage(maxItems > 0 ? maxItems : 1);
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = userData.files.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = userData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className='list'>
       <h2>📂 Uploaded Files</h2>
       <div className="client-data-list">
-        <span>Data for User: {userData.user.name}</span>
+        <span>Data for User ID: {userData.values.name}</span> 
       </div>
 
       <div className="uploaded-files">
@@ -92,6 +88,9 @@ function List() {
           <p>No files uploaded yet.</p>
         )}
       </div>
+
+     
+      
 
       <button className='upload-btn' onClick={() => navigate(`/upload-page/${userId}`)}>📤 Upload New File</button>
     </div>
