@@ -11,7 +11,7 @@ function Admin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const admin = await axios.post('https://studentshub-2.onrender.com/api/admin', {
+            const admin = await axios.post('https://tuition-app-suz1.onrender.com/api/admin', {
                 email: adminEmail,
                 password: adminPassword
             });

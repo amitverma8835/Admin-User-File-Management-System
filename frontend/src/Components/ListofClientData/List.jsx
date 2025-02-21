@@ -25,7 +25,7 @@ function List() {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`https://studentshub-2.onrender.com/api/user/${userId}`);
+      const response = await axios.get(`https://tuition-app-suz1.onrender.com/api/user/${userId}`);
       setUserData(response.data);
     } catch (error) {
       console.log('Error fetching data:', error);
@@ -33,12 +33,12 @@ function List() {
   };
 
   const handleDownload = (fileId) => {
-    window.location.href = `https://studentshub-2.onrender.com/api/download/${fileId}`;
+    window.location.href = `https://tuition-app-suz1.onrender.com/api/download/${fileId}`;
   };
 
   const handleDelete = async (fileId) => {
     try {
-      await axios.delete(`https://studentshub-2.onrender.com/api/delete-file/${fileId}`);
+      await axios.delete(`https://tuition-app-suz1.onrender.com/api/delete-file/${fileId}`);
       alert("File deleted successfully!");
       setUserData(userData.filter(file => file._id !== fileId));
     } catch (error) {

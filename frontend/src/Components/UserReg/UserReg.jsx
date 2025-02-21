@@ -14,7 +14,7 @@ function UserReg() {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     try {
-      const result = await axios.post('https://studentshub-2.onrender.com/api/signup',{
+      const result = await axios.post('https://tuition-app-suz1.onrender.com/api/signup',{
         name: userName, 
         email: userEmail, 
         password: userPassword

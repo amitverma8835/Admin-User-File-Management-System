@@ -12,7 +12,7 @@ function ClientPage() {
 
   useEffect(() => {
     if (userId) {
-      axios.get(`https://studentshub-2.onrender.com/api/user/${userId}`)
+      axios.get(`https://tuition-app-suz1.onrender.com/api/user/${userId}`)
         .then(response => {
           setUserData(response.data);
         })
@@ -42,7 +42,7 @@ function ClientPage() {
   const currentItems = userData.slice(startIndex, startIndex + itemsPerPage);
 
   const handleDownload = (fileId) => {
-    window.location.href = `https://studentshub-2.onrender.com/api/download/${fileId}`;
+    window.location.href = `https://tuition-app-suz1.onrender.com/api/download/${fileId}`;
   };
 
   return (

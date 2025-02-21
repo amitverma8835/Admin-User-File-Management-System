@@ -31,7 +31,7 @@ function UploadPage() {
 
     try {
         const result = await axios.post(
-            'https://studentshub-2.onrender.com/api/fileupload',
+            'https://tuition-app-suz1.onrender.com/api/fileupload',
             formData,
             { headers: { "Content-Type": "multipart/form-data" } }
         );

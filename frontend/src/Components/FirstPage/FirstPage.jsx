@@ -12,7 +12,7 @@ function FirstPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post('https://studentshub-2.onrender.com/api/login', {
+            const result = await axios.post('https://tuition-app-suz1.onrender.com/api/login', {
                 email: loginEmail,
                 password: loginPassword,
             });

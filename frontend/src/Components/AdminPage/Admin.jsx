@@ -13,7 +13,7 @@ function Admin() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("https://studentshub-2.onrender.com/api/fetchingusername");
+      const response = await axios.get("https://tuition-app-suz1.onrender.com/api/fetchingusername");
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -24,7 +24,7 @@ function Admin() {
     console.log("Deleting User ID:", userId);  
   
     try {
-      const response = await axios.delete(`https://studentshub-2.onrender.com/api/deleteUser/${userId}`);
+      const response = await axios.delete(`https://tuition-app-suz1.onrender.com/api/deleteUser/${userId}`);
       console.log("Delete response:", response.data);
       
       alert(`User deleted successfully!`);
