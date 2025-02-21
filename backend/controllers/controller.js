@@ -62,8 +62,7 @@ exports.loginRoute = async (req, res) => {
                         return res.status(400).json({ message: "Wrong Password" });
                 }
 
-                console.log("User Name:", user.name);
-                console.log("User ID:", user._id); 
+            
                 res.status(200).json({
                         message: "Login successful",
                         userId: user._id,  
@@ -138,7 +137,7 @@ exports.adminCheck = async (req, res) => {
 exports.fileUpload = async (req, res) => {
         upload.single('file')(req, res, async function (err) {
             if (err) {
-                console.error("❌ Multer error:", err);
+                console.error("Multer error:", err);
                 return res.status(500).json({ msg: "Multer error", error: err.message });
             }
     
@@ -152,20 +151,20 @@ exports.fileUpload = async (req, res) => {
                     return res.status(400).json({ msg: "File is required." });
                 }
     
-                console.log("✅ File uploaded:", req.file.filename);
+                console.log("File uploaded:", req.file.filename);
     
                 const uploadFile = await fileSchema.create({
                     topic,
                     Fac,
                     fileName: req.file.filename,  
-                    filePath: `uploads/${req.file.filename}`,  // File path store karega
+                    filePath: `uploads/${req.file.filename}`,  
                     userId
                 });
     
                 res.status(201).json({ msg: "File Uploaded Successfully", data: uploadFile });
     
             } catch (error) {
-                console.error("❌ Error uploading file:", error);
+                console.error(" Error uploading file:", error);
                 res.status(500).json({ msg: "Internal Server Error", error: error.message });
             }
         });
@@ -176,22 +175,19 @@ exports.fetchUserData = async (req, res) => {
                 const { userId } = req.params;
 
                 if (!mongoose.Types.ObjectId.isValid(userId)) {
-                        console.log("❌ Invalid userId format");
                         return res.status(400).json({ message: 'Invalid userId format' });
                 }
 
                 const userData = await fileSchema.find({ userId: new mongoose.Types.ObjectId(userId) });
 
                 if (userData.length === 0) {
-                        console.log("❌ No data found for this userId.");
+                
                         return res.status(404).json({ message: 'No data found for this userId' });
                 }
 
-                console.log("✅ Successfully fetched data:", userData);
                 res.status(200).json(userData); 
 
         } catch (error) {
-                console.error("❌ Server Error:", error);
                 res.status(500).json({ error: 'Internal Server Error' });
         }
 };
@@ -231,7 +227,6 @@ exports.downloadFile = async (req, res) => {
             });
     
         } catch (error) {
-            console.error("❌ Server Error:", error);
             res.status(500).json({ error: "Internal Server Error", details: error.message });
         }
     };
@@ -243,24 +238,20 @@ exports.downloadFile = async (req, res) => {
             const { id } = req.params;  
     
             if (!mongoose.Types.ObjectId.isValid(id)) {
-                console.log("❌ Invalid User ID format");
                 return res.status(400).json({ message: "Invalid User ID format" });
             }
     
             const user = await UsersSchema.findById(id);
             if (!user) {
-                console.log("❌ User not found in database");
                 return res.status(404).json({ message: "User not found" });
             }
     
             await UsersSchema.findByIdAndDelete(id);
             const deleteFiles = await FileSchema.deleteMany({ userId: id });
-            console.log(`✅ Deleted ${deleteFiles.deletedCount} files.`);
     
             return res.json({ message: "User and files deleted successfully" });
     
         } catch (error) {
-            console.error("❌ Error deleting user:", error.message);
             return res.status(500).json({ message: "Internal server error", error: error.message });
         }
     };

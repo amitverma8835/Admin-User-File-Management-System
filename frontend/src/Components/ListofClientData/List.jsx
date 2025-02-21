@@ -62,7 +62,7 @@ function List() {
     <div className='list'>
       <h2>📂 Uploaded Files</h2>
       <div className="client-data-list">
-        <span>Name : {userId.user.name}</span> 
+        <span>Data for User ID: {userId}</span> 
       </div>
 
       <div className="uploaded-files">
