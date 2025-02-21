@@ -62,7 +62,8 @@ exports.loginRoute = async (req, res) => {
                         return res.status(400).json({ message: "Wrong Password" });
                 }
 
-            
+                console.log("User Name:", user.name);
+                console.log("User ID:", user._id); 
                 res.status(200).json({
                         message: "Login successful",
                         userId: user._id,  
@@ -137,7 +138,6 @@ exports.adminCheck = async (req, res) => {
 exports.fileUpload = async (req, res) => {
         upload.single('file')(req, res, async function (err) {
             if (err) {
-                console.error("Multer error:", err);
                 return res.status(500).json({ msg: "Multer error", error: err.message });
             }
     
@@ -151,20 +151,18 @@ exports.fileUpload = async (req, res) => {
                     return res.status(400).json({ msg: "File is required." });
                 }
     
-                console.log("File uploaded:", req.file.filename);
     
                 const uploadFile = await fileSchema.create({
                     topic,
                     Fac,
                     fileName: req.file.filename,  
-                    filePath: `uploads/${req.file.filename}`,  
+                    filePath: `uploads/${req.file.filename}`,  // File path store karega
                     userId
                 });
     
                 res.status(201).json({ msg: "File Uploaded Successfully", data: uploadFile });
     
             } catch (error) {
-                console.error(" Error uploading file:", error);
                 res.status(500).json({ msg: "Internal Server Error", error: error.message });
             }
         });
@@ -181,10 +179,10 @@ exports.fetchUserData = async (req, res) => {
                 const userData = await fileSchema.find({ userId: new mongoose.Types.ObjectId(userId) });
 
                 if (userData.length === 0) {
-                
                         return res.status(404).json({ message: 'No data found for this userId' });
                 }
 
+                console.log("✅ Successfully fetched data:", userData);
                 res.status(200).json(userData); 
 
         } catch (error) {
@@ -221,7 +219,6 @@ exports.downloadFile = async (req, res) => {
     
             res.download(filePath, fileData.fileName, (err) => {
                 if (err) {
-                    console.error("❌ File download error:", err);
                     return res.status(500).json({ message: "Error in file download" });
                 }
             });
