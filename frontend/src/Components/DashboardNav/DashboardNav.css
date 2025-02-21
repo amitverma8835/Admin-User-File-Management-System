@@ -1,0 +1,84 @@
+.dashboardnav {
+  width: 90%;
+  height: 12vh;
+  background-color: rgb(48, 89, 237);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-name h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+}
+
+.web-logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+  color: white;
+}
+
+.logout-icon {
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.logout-icon:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+  .dashboardnav {
+    height: 10vh;
+    width: 95%;
+    padding: 0 15px;
+  }
+
+  .admin-name h2, .web-logo {
+    font-size: 18px;
+  }
+
+  .logout-icon {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardnav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .right-section {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .admin-name h2, .web-logo {
+    font-size: 16px;
+  }
+
+  .logout-icon {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+}

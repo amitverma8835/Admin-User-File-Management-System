@@ -1,0 +1,104 @@
+.dashboardpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: #f4f7fc;
+    min-height: 100vh;
+}
+
+.dashboardpage h1 {
+    font-family: "Poppins", sans-serif;
+}
+
+.clients-data {
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual Client Box */
+.client-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.client-name:hover {
+    transform: scale(1.02);
+}
+
+/* User Name & Date Styling */
+.client-name a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.client-name a:hover {
+    color: #007bff;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+@media (max-width: 768px) {
+    .clients-data {
+        width: 95%;
+    }
+
+    .client-name {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .delete-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboardpage {
+        padding: 20px;
+    }
+
+    .clients-data {
+        width: 100%;
+    }
+
+    .client-name {
+        padding: 12px;
+    }
+
+    .client-name a {
+        font-size: 16px;
+    }
+
+    .delete-btn {
+        font-size: 14px;
+    }
+}
